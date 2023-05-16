@@ -22,6 +22,14 @@ app.onError((err: any, ctx) => (console.log(err), ctx.text(`${err}`, err.res?.st
 const API_VERSION = 'v1';
 app.get(`/api/${API_VERSION}/hello`, (ctx) => ctx.json({ hello: 'world' }));
 
+// * Pre-game
+// Agent registration
+app.get(`/api/${API_VERSION}/register/:symbol/:faction`, (ctx) => {
+	const symbol = ctx.req.param('symbol');
+	const faction = ctx.req.param('faction');
+	return ctx.json({ symbol, faction, success: true });
+});
+
 // * Other
 // Unknown API route
 app.get('/api/*', (ctx) => ctx.json({ success: false, message: 'Unknown API route' }, 404));
