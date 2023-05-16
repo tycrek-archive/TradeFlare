@@ -1,0 +1,74 @@
+doctype html
+html.dark.sl-theme-dark(lang='en')
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		title #{data.package.name} #{data.package.version}
+		meta(name='description' content=data.package.description)
+		meta(property='og:title' content=data.package.name)
+		meta(property='og:description' content=data.package.description)
+		meta(name='theme-color' content='black')
+		style
+			!= css.tailwind
+		//- Shoelace-FontAwesome Pug mixin
+		include ../node_modules/shoelace-fontawesome-pug/sl-fa-mixin.pug
+		include ../node_modules/shoelace-pug-loader/loader.pug
+		+slTheme('dark')
+		//- Shoelace components
+		+slComponents('icon', 'dialog', 'button', 'icon-button', 'tooltip', 'input')
+	body.w-full.h-screen.bg-black
+		.w-full.h-full.flex.flex-col
+			//- header/token
+			.flex.flex-col.md_flex-row.border-b-2.border-stone-600.p-8.gap-4
+				//- header
+				.flex.flex-row.flex-shrink
+					h1.text-4xl.font-bold.self-end.mr-2 #{data.package.name}
+					h2.text-xl.italic.self-end #{data.package.version}
+				//- token
+				.flex-grow.flex.items-center.justify-center.md_justify-end
+					div.flex.flex-row.gap-4
+						sl-button#new(onclick='return;')
+							sl-icon(name='fas-user-plus' slot='prefix' library='fa')
+							span.upper.font-bold New
+						sl-input#token(type='password' placeholder='SpaceTrader token' clearable password-toggle)
+							sl-icon(name='fas-lock-keyhole' slot='prefix' library='fa')
+	
+		sl-dialog#new-modal(label='Generate new Agent')
+			p.text-lg.mb-4 Enter a new #[strong call sign], then optionally choose a #[strong faction].
+			h3.text-xl.font-bold.mb-2 Call sign
+			sl-input.mb-2#call-sign(type='text' placeholder='Call sign' clearable)
+			h3.text-xl.font-bold.mb-2 Faction
+			sl-input.mb-2#faction(type='text' placeholder='Faction' clearable)
+			//- todo: make this a select
+			.w-full.text-center.mt-2
+				sl-button#register(onclick='return;')
+					sl-icon(name='fas-user-plus' slot='prefix' library='fa')
+					span.upper.font-bold Register
+
+		script.
+			const dialog = document.querySelector('#new-modal');
+			const newButton = document.querySelector('sl-button#new');
+			const registerButton = document.querySelector('sl-button#register');
+			const input = document.querySelector('sl-input#token');
+
+			newButton.addEventListener('click', (event) => dialog.show());
+
+			registerButton.addEventListener('click', (event) => {
+				// Get the value of the inputs
+				const callSign = document.querySelector('sl-input#call-sign').value;
+				const faction = document.querySelector('sl-input#faction').value;
+				console.log(`Call sign: ${callSign}`);
+				console.log(`Faction: ${faction}`);
+
+				fetch(`/api/v1/register/${callSign}/${faction}`)
+					.then(res => res.json())
+					.then(data => {
+						console.log(data);
+						dialog.hide();
+					});
+			});
+
+			input.addEventListener('sl-input', (event) => {
+				// Get the value of the input
+				console.log(`Token: ${event.target.value}`);
+			});
