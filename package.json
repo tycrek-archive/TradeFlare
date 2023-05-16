@@ -1,0 +1,15 @@
+{
+	"name": "TradeFlare",
+	"version": "0.0.0",
+	"description": "SpaceTraders client built for Cloudflare Pages.",
+	"author": "tycrek <t@tycrek.com> (https://tycrek.com)",
+	"repository": "github:tycrek/TradeFlare",
+	"scripts": {
+		"build": "esbuild --bundle src/app.ts --format=esm --outfile=dist/_worker.js",
+		"pagery": "node ./node_modules/pagery/dist/pagery.js --data=package.json --output=dist/",
+		"dev": "npm run build && npm run pagery && npx wrangler pages dev dist/ --kv TradeFlare",
+		"publish": "npm run build && npm run pagery && npx wrangler pages publish dist/ --project-name=TradeFlare"
+	},
+	"dependencies": {
+	}
+}
