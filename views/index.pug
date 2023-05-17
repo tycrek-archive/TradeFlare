@@ -65,9 +65,9 @@ html.dark.sl-theme-dark(lang='en')
 					span.upper.font-bold Register
 
 		sl-dialog#success-dialog(label='Agent created!')
-			p.text-lg Welcome to #[strong SpaceTraders], #[strong#success-name &nbsp;]!
-			p.text-md.italic Coming soon: a button to copy the token to your clipboard.
-			h3.text-xl.font-bold.font-mono#copyToken &nbsp;
-			//- todo: button to copy token to clipboard
+			p.text-lg.mb-2 Welcome to #[strong SpaceTraders], #[strong#success-name &nbsp;]!
+			.flex.justify-center
+				sl-button#copyNewTokenButton(onclick='return;') Copy token
+				h3.text-xl.font-bold.font-mono.hidden#copyToken &nbsp;
 
 		script: include ../dist/ui.js

@@ -2,6 +2,7 @@ const newDialog = document.querySelector('#new-modal');
 const successDialog = document.querySelector('#success-dialog');
 const newButton = document.querySelector('sl-button#new');
 const registerButton = document.querySelector('sl-button#register');
+const copyNewTokenButton = document.querySelector('sl-button#copyNewToken');
 const input = (document.querySelector('sl-input#token') as HTMLInputElement);
 
 newButton.addEventListener('click', (event) => (newDialog as any).show());
@@ -49,3 +50,10 @@ input.addEventListener('sl-input', (event) => {
 		})
 		.catch(err => console.error(err));
 });
+
+function copyNewToken() {
+	navigator.clipboard.writeText((document.querySelector('#copyToken') as HTMLElement).innerText)
+		.then(() => document.querySelector('#copyNewTokenButton').innerHTML = 'Copied!')
+		.catch((err) => (console.error(err), alert('An error occurred, see console for details')));
+}
+document.querySelector('#copyNewTokenButton').addEventListener('click', copyNewToken);
