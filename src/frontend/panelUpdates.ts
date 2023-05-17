@@ -26,7 +26,7 @@ export const updateAgentPanel = (agent: Agent, reset = false) => {
 		Elements.AgentPanel.accIdTooltip.setAttribute('content', agent.accountId);
 		Elements.AgentPanel.location.innerText = agent.headquarters;
 		Elements.AgentPanel.credits.innerText = commaDelimNumbers(agent.credits);
-		(Elements.AgentPanel.avatar as any).image = `https://robohash.org/${agent.symbol}.png?size=128x128&set=set4&bgset=bg1`;
+		(Elements.AgentPanel.avatar as any).image = `https://robohash.org/${agent.symbol}.png?size=128x128&set=set4&bgset=bg2`;
 		// (2/2) Show elements
 		Elements.AgentPanel.detailsHider.classList.remove('hidden');
 	}
