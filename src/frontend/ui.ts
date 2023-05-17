@@ -1,4 +1,5 @@
 import { Elements } from './elements';
+import { updateAgentPanel } from './panelUpdates';
 
 // * New user flow
 // Open the new user dialog
@@ -17,25 +18,23 @@ Elements.NewUser.registerButton.addEventListener('click', (event) => {
 
 	// Call the API
 	fetch(`/api/v1/register/${callSign}/${faction}`)
-		.then(res => res.json())
+		.then((res) => res.json())
 		.then((data: any) => {
 			// ! This doesn't error handle properly yet
 
 			// Set the primary token input
-			Elements.Core.userTokenInput.value = data.data.token;
+			Elements.Core.userTokenInput.value = data.token;
 
 			// Set the name in the success dialog
-			Elements.NewUser.successName.innerText = data.data.agent.symbol;
+			Elements.NewUser.successName.innerText = data.agent.symbol;
 
 			// Set the agent info in the agent panel
-			Elements.AgentPanel.name.innerText = data.data.agent.symbol;
-			Elements.AgentPanel.accountId.innerText = data.data.agent.accountId;
-			Elements.AgentPanel.location.innerText = data.data.agent.headquarters;
+			updateAgentPanel(data);
 
 			(Elements.NewUser.newDialog as any).hide();
 			(Elements.NewUser.successDialog as any).show();
 		})
-		.catch(err => console.error(err));
+		.catch((err) => console.error(err));
 });
 
 Elements.NewUser.copyNewTokenButton.addEventListener('click', (event) => {
@@ -48,12 +47,10 @@ Elements.NewUser.copyNewTokenButton.addEventListener('click', (event) => {
 // * Sign in flow
 Elements.Core.userTokenInput.addEventListener('sl-input', (event) => {
 	fetch(`/api/v1/signin/${Elements.Core.userTokenInput.value}`)
-		.then(res => res.json())
-		.then((data: any) => {
-			Elements.AgentPanel.name.innerText = data.data.symbol;
-			Elements.AgentPanel.accountId.innerText = data.data.accountId;
-			Elements.AgentPanel.location.innerText = data.data.headquarters;
+		.then((res) => {
+			if (res.status === 200) return res.json();
+			else throw new Error(`HTTP ${res.statusText}`);
 		})
-		.catch(err => console.error(err));
+		.then((data: any) => updateAgentPanel(data))
+		.catch((err) => (console.error(err), updateAgentPanel(null, true)));
 });
-

@@ -11,12 +11,12 @@ const register = async (symbol: string, faction: string) => {
 
 	const data: any = await res.json();
 
-	if (res.status !== 200 && data.error) {
+	if (res.status !== 200 || data.error) {
 		const error: STErrorResponse = data;
 		throw new Error(error.error.message);
 	}
 
-	return data as STRegisterResponse;
+	return data.data as STRegisterResponse;
 };
 
 const signIn = async (token: string) => {
@@ -27,12 +27,12 @@ const signIn = async (token: string) => {
 
 	const data: any = await res.json();
 
-	if (res.status !== 200 && data.error) {
+	if (res.status !== 200 || data.error) {
 		const error: STErrorResponse = data;
 		throw new Error(error.error.message);
 	}
 
-	return data as STSignInResponse;
+	return data.data as STSignInResponse;
 };
 
 export default {

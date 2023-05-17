@@ -9,17 +9,13 @@ export interface STErrorResponse {
 }
 
 export interface STRegisterResponse {
-	data: {
-		token: string;
-		agent: Agent;
-		contract: Contract;
-		faction: Faction;
-		ship: Ship;
-	}
+	token: string;
+	agent: Agent;
+	contract: Contract;
+	faction: Faction;
+	ship: Ship;
 }
 
 export interface STSignInResponse {
-	data: {
-		agent: Agent;
-	}
+	agent: Agent;
 }
