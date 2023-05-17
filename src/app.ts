@@ -33,6 +33,14 @@ app.get(`/api/${API_VERSION}/register/:symbol/:faction`, (ctx) => {
 		.catch((err) => ctx.json({ success: false, message: err.message }, 400));
 });
 
+// Sign in
+app.get(`/api/${API_VERSION}/signin/:token`, (ctx) => {
+	const token = ctx.req.param('token');
+	return SpaceTraders.signIn(token)
+		.then((data) => ctx.json(data))
+		.catch((err) => ctx.json({ success: false, message: err.message }, 400));
+});
+
 // * Other
 // Unknown API route
 app.get('/api/*', (ctx) => ctx.json({ success: false, message: 'Unknown API route' }, 404));

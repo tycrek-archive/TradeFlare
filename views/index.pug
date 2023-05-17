@@ -95,11 +95,13 @@ html.dark.sl-theme-dark(lang='en')
 					.then(res => res.json())
 					.then(data => {
 						document.querySelector('#token').value = data.data.token;
+						document.querySelector('#copyToken').innerText = data.data.token;
 						document.querySelector('#success-name').innerText = data.data.agent.symbol;
+
 						document.querySelector('#agent-name').innerText = data.data.agent.symbol;
 						document.querySelector('#account-id').innerText = data.data.agent.accountId;
-						document.querySelector('#copyToken').innerText = data.data.token;
 						document.querySelector('#agent-location').innerText = data.data.agent.headquarters;
+
 						newDialog.hide();
 						successDialog.show();
 					})
@@ -109,4 +111,14 @@ html.dark.sl-theme-dark(lang='en')
 			input.addEventListener('sl-input', (event) => {
 				// Get the value of the input
 				console.log(`Token: ${event.target.value}`);
+
+				fetch(`/api/v1/signin/${input.value}`)
+					.then(res => res.json())
+					.then(data => {
+						console.log(data)
+						document.querySelector('#agent-name').innerText = data.data.symbol;
+						document.querySelector('#account-id').innerText = data.data.accountId;
+						document.querySelector('#agent-location').innerText = data.data.headquarters;
+					})
+					.catch(err => console.error(err));
 			});

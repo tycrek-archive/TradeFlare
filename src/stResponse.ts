@@ -17,3 +17,9 @@ export interface STRegisterResponse {
 		ship: Ship;
 	}
 }
+
+export interface STSignInResponse {
+	data: {
+		agent: Agent;
+	}
+}
