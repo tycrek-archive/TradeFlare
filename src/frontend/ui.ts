@@ -31,6 +31,7 @@ Elements.NewUser.registerButton.addEventListener('click', (event) => {
 			// Set the agent info in the agent panel
 			updateAgentPanel(data.agent);
 
+			// Swap dialogs
 			(Elements.NewUser.newDialog as any).hide();
 			(Elements.NewUser.successDialog as any).show();
 		})
@@ -46,6 +47,7 @@ Elements.NewUser.copyNewTokenButton.addEventListener('click', (event) => {
 
 // * Sign in flow
 Elements.Core.userTokenInput.addEventListener('sl-input', (event) => {
+	// todo: people probably don't want this to be a GET path thing
 	fetch(`/api/v1/signin/${Elements.Core.userTokenInput.value}`)
 		.then((res) => {
 			if (res.status === 200) return res.json();

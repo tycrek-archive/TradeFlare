@@ -1,8 +1,8 @@
 export const Elements = {
-	Core: { // * Core elements
+	Core: {
 		userTokenInput: document.querySelector('#UserTokenInput') as HTMLInputElement
 	},
-	NewUser: { // * New user flow
+	NewUser: {
 		newButton: document.querySelector('#NewUserButton') as HTMLElement,
 		newDialog: document.querySelector('#NewUserModal') as HTMLElement,
 
@@ -14,7 +14,7 @@ export const Elements = {
 		successName: document.querySelector('#NUSDName') as HTMLElement,
 		copyNewTokenButton: document.querySelector('#NUSDCopyNewTokenButton') as HTMLElement,
 	},
-	AgentPanel: { // * Agent panel
+	AgentPanel: {
 		name: document.querySelector('#AgentName') as HTMLElement,
 		accountId: document.querySelector('#AgentAccountId') as HTMLElement,
 		location: document.querySelector('#AgentLocation') as HTMLElement,
