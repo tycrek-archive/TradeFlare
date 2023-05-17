@@ -26,7 +26,7 @@ app.get(`/api/${API_VERSION}/hello`, (ctx) => ctx.json({ hello: 'world' }));
 // * Pre-game
 // Agent registration
 app.get(`/api/${API_VERSION}/register/:symbol/:faction`, (ctx) => {
-	const symbol = ctx.req.param('symbol');
+	const symbol = ctx.req.param('symbol').substring(0, 14); // todo: show error if too long
 	const faction = ctx.req.param('faction');
 	return SpaceTraders.register(symbol, faction)
 		.then((data) => ctx.json(data))
