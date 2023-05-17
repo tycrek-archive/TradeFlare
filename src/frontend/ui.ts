@@ -54,5 +54,14 @@ Elements.Core.userTokenInput.addEventListener('sl-input', (event) => {
 			else throw new Error(`HTTP ${res.statusText}`);
 		})
 		.then((data: any) => updateAgentPanel(data))
+
+		// Update "me" data
+		.then(() => fetch(`/api/v1/me/${Elements.Core.userTokenInput.value}`))
+		.then((res) => {
+			if (res.status === 200) return res.json();
+			else throw new Error(`HTTP ${res.statusText}`);
+		})
+		.then((data: any) => console.log(data))
+
 		.catch((err) => (console.error(err), updateAgentPanel(null, true)));
 });

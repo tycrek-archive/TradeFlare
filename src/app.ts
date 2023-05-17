@@ -41,6 +41,14 @@ app.get(`/api/${API_VERSION}/signin/:token`, (ctx) => {
 		.catch((err) => ctx.json({ success: false, message: err.message }, 400));
 });
 
+// * "My" details (combo of Agent, Faction)
+app.get(`/api/${API_VERSION}/me/:token`, (ctx) => {
+	const token = ctx.req.param('token');
+	return SpaceTraders.getMe(token)
+		.then((data) => ctx.json(data))
+		.catch((err) => ctx.json({ success: false, message: err.message }, 400));
+});
+
 // * Other
 // Unknown API route
 app.get('/api/*', (ctx) => ctx.json({ success: false, message: 'Unknown API route' }, 404));

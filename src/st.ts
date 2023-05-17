@@ -37,7 +37,40 @@ const signIn = async (token: string) => {
 	return data.data as STSignInResponse;
 };
 
+const getMe = async (token: string) => {
+	const myUrls = [
+		BASE.concat('/my/agent'),
+		BASE.concat('/my/factions'),
+		BASE.concat('/my/contracts'),
+		BASE.concat('/my/ships'),
+	];
+
+	const res = await Promise.all(myUrls.map((url: string) => fetch(url, {
+		method: 'GET',
+		headers: { Authorization: `Bearer ${token}` }
+	})));
+
+	const data: any[] = await Promise.all(res.map((r) => r.json()));
+	const errors = data.filter((d) => d.error);
+
+	if (errors.length > 0) {
+		const msg = `[SpaceTraders::getMe] Unknown Error Sig-niu1bas4gff4dy2q8yr`;
+		console.error(msg);
+		throw new Error(msg);
+	}
+
+	const [agent, factions, contracts, ships] = data;
+
+	return {
+		agent: agent.data,
+		factions: factions.data,
+		contracts: contracts.data,
+		ships: ships.data,
+	};
+}
+
 export default {
 	register,
 	signIn,
+	getMe,
 }
