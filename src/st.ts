@@ -9,11 +9,12 @@ const register = async (symbol: string, faction: string) => {
 		body: JSON.stringify({ symbol, faction })
 	});
 
+	console.log(`[SpaceTraders::Registration] ${res.status} ${res.statusText}`);
 	const data: any = await res.json();
 
 	if (res.status !== 200 || data.error) {
-		const error: STErrorResponse = data;
-		throw new Error(error.error.message);
+		console.error(`[SpaceTraders::Registration] Error: ${data.error.message}`);
+		throw new Error(data.error.message);
 	}
 
 	return data.data as STRegisterResponse;
@@ -25,11 +26,12 @@ const signIn = async (token: string) => {
 		headers: { Authorization: `Bearer ${token}` }
 	});
 
+	console.log(`[SpaceTraders::SignIn] ${res.status} ${res.statusText}`);
 	const data: any = await res.json();
 
 	if (res.status !== 200 || data.error) {
-		const error: STErrorResponse = data;
-		throw new Error(error.error.message);
+		console.error(`[SpaceTraders::SignIn] Error: ${data.error.message}`);
+		throw new Error(data.error.message);
 	}
 
 	return data.data as STSignInResponse;
