@@ -12,17 +12,17 @@ export const updateAgentPanel = (agent: Agent, reset = false) => {
 		Elements.AgentPanel.accountId.innerText = '&nbsp;';
 		Elements.AgentPanel.location.innerText = '&nbsp;';
 		// (2/2) Hide elements
-		Elements.AgentPanel.name.classList.add('hidden');
+		Elements.AgentPanel.nameParent.classList.add('hidden');
 		Elements.AgentPanel.accountId.classList.add('hidden');
-		Elements.AgentPanel.location.classList.add('hidden');
+		Elements.AgentPanel.locationParent.classList.add('hidden');
 	} else {
 		// (1/2) Set values
 		Elements.AgentPanel.name.innerText = agent.symbol;
 		Elements.AgentPanel.accountId.innerText = agent.accountId;
 		Elements.AgentPanel.location.innerText = agent.headquarters;
 		// (2/2) Show elements
-		Elements.AgentPanel.name.classList.remove('hidden');
+		Elements.AgentPanel.nameParent.classList.remove('hidden');
 		Elements.AgentPanel.accountId.classList.remove('hidden');
-		Elements.AgentPanel.location.classList.remove('hidden');
+		Elements.AgentPanel.locationParent.classList.remove('hidden');
 	}
 };

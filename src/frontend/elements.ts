@@ -18,5 +18,8 @@ export const Elements = {
 		name: document.querySelector('#AgentName') as HTMLElement,
 		accountId: document.querySelector('#AgentAccountId') as HTMLElement,
 		location: document.querySelector('#AgentLocation') as HTMLElement,
+
+		nameParent: document.querySelector('#AgentNameParent') as HTMLElement,
+		locationParent: document.querySelector('#AgentLocationParent') as HTMLElement,
 	}
 }
