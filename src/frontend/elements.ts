@@ -22,6 +22,7 @@ export const Elements = {
 		accIdTooltip: document.querySelector('#AgentAccountIdTooltip') as HTMLElement,
 		accIdCopyButton: document.querySelector('#AgentAccountIdCopyButton') as HTMLElement,
 		location: document.querySelector('#AgentLocation') as HTMLElement,
+		credits: document.querySelector('#AgentCredits') as HTMLElement,
 		accountId: document.querySelector('#AgentAccountId') as HTMLElement,
 	}
 }
