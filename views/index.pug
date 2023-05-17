@@ -55,8 +55,13 @@ html.dark.sl-theme-dark(lang='en')
 
 			registerButton.addEventListener('click', (event) => {
 				// Get the value of the inputs
-				const callSign = document.querySelector('sl-input#call-sign').value;
-				const faction = document.querySelector('sl-input#faction').value;
+				let callSign = document.querySelector('sl-input#call-sign').value;
+				let faction = document.querySelector('sl-input#faction').value;
+
+				// Fix faction
+				if (faction == null || faction == '')
+					faction = 'COSMIC';
+
 				console.log(`Call sign: ${callSign}`);
 				console.log(`Faction: ${faction}`);
 
