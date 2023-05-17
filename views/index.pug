@@ -37,7 +37,7 @@ html.dark.sl-theme-dark(lang='en')
 						sl-input#UserTokenInput(type='password' placeholder='SpaceTrader token' clearable password-toggle)
 							sl-icon(name='fas-lock-keyhole' slot='prefix' library='fa')
 			//- main page
-			.grid.grid-cols-1.md_grid-cols-2.lg_grid-cols-3.xl_grid-cols-4.gap-4.p-8
+			.grid.grid-cols-1.md_grid-cols-2.lg_grid-cols-3.2xl_grid-cols-4.gap-4.p-8
 
 				//- agent info
 				.info-panel
@@ -52,8 +52,8 @@ html.dark.sl-theme-dark(lang='en')
 									span.text-2xl#AgentName &nbsp;
 									sl-tooltip#AgentAccountIdTooltip(content='Account ID')
 										sl-icon.hover_cursor-pointer.text-zinc-400#AgentAccountIdCopyButton(name='fas-id-card' library='fa')
-								p.text-lg.text-zinc-400 ↪ #[span#AgentLocation &nbsp;]
-								p.text-lg.text-zinc-400 ↪ $#[span#AgentCredits &nbsp;]
+								p.text-lg.text-zinc-400.whitespace-nowrap ↪ #[span.whitespace-nowrap#AgentLocation &nbsp;]
+								p.text-lg.text-zinc-400.whitespace-nowrap ↪ $#[span.whitespace-nowrap#AgentCredits &nbsp;]
 								.hidden#AgentAccountId &nbsp;
 
 				//- faction info
