@@ -4,7 +4,7 @@ export interface STErrorResponse {
 	error: {
 		message: string;
 		code: number;
-		data: any;
+		data?: any;
 	}
 }
 
