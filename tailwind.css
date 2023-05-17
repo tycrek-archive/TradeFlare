@@ -8,6 +8,10 @@
 	.info-panel {
 		@apply bg-zinc-900 rounded-2xl p-4;
 	}
+
+	.info-panel-title {
+		@apply text-2xl font-bold mb-2 border-b-2 border-zinc-700 pb-2;
+	}
 }
 
 @layer utilities {}
