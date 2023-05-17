@@ -45,13 +45,17 @@ html.dark.sl-theme-dark(lang='en')
 					sl-icon(name='fas-user-plus' slot='prefix' library='fa')
 					span.upper.font-bold Register
 
+		sl-dialog#success-dialog(label='Agent created!')
+			p.text-lg Welcome to #[strong SpaceTraders], #[strong#success-name &nbsp;]!
+
 		script.
-			const dialog = document.querySelector('#new-modal');
+			const newDialog = document.querySelector('#new-modal');
+			const successDialog = document.querySelector('#success-dialog');
 			const newButton = document.querySelector('sl-button#new');
 			const registerButton = document.querySelector('sl-button#register');
 			const input = document.querySelector('sl-input#token');
 
-			newButton.addEventListener('click', (event) => dialog.show());
+			newButton.addEventListener('click', (event) => newDialog.show());
 
 			registerButton.addEventListener('click', (event) => {
 				// Get the value of the inputs
@@ -68,9 +72,12 @@ html.dark.sl-theme-dark(lang='en')
 				fetch(`/api/v1/register/${callSign}/${faction}`)
 					.then(res => res.json())
 					.then(data => {
-						console.log(data);
-						dialog.hide();
-					});
+						document.querySelector('#token').value = data.data.token;
+						document.querySelector('#success-name').innerText = data.data.agent.symbol;
+						newDialog.hide();
+						successDialog.show();
+					})
+					.catch(err => console.error(err));
 			});
 
 			input.addEventListener('sl-input', (event) => {
