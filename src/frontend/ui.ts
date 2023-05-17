@@ -1,9 +1,4 @@
-const newDialog = document.querySelector('#new-modal');
-const successDialog = document.querySelector('#success-dialog');
-const newButton = document.querySelector('sl-button#new');
-const registerButton = document.querySelector('sl-button#register');
-const copyNewTokenButton = document.querySelector('sl-button#copyNewToken');
-const input = (document.querySelector('sl-input#token') as HTMLInputElement);
+import { newDialog, successDialog, newButton, registerButton, copyNewTokenButton, userTokenInput } from './elements';
 
 newButton.addEventListener('click', (event) => (newDialog as any).show());
 
@@ -36,11 +31,11 @@ registerButton.addEventListener('click', (event) => {
 		.catch(err => console.error(err));
 });
 
-input.addEventListener('sl-input', (event) => {
+userTokenInput.addEventListener('sl-input', (event) => {
 	// Get the value of the input
 	console.log(`Token: ${(event.target as HTMLInputElement).value}`);
 
-	fetch(`/api/v1/signin/${input.value}`)
+	fetch(`/api/v1/signin/${userTokenInput.value}`)
 		.then(res => res.json())
 		.then((data: any) => {
 			console.log(data);
