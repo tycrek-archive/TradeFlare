@@ -47,13 +47,9 @@ Elements.NewUser.copyNewTokenButton.addEventListener('click', (event) => {
 
 // * Sign in flow
 Elements.Core.userTokenInput.addEventListener('sl-input', (event) => {
-	// Get the value of the input
-	console.log(`Token: ${(event.target as HTMLInputElement).value}`);
-
 	fetch(`/api/v1/signin/${Elements.Core.userTokenInput.value}`)
 		.then(res => res.json())
 		.then((data: any) => {
-			console.log(data);
 			Elements.AgentPanel.name.innerText = data.data.symbol;
 			Elements.AgentPanel.accountId.innerText = data.data.accountId;
 			Elements.AgentPanel.location.innerText = data.data.headquarters;

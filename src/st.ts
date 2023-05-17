@@ -31,7 +31,6 @@ const signIn = async (token: string) => {
 		const error: STErrorResponse = data;
 		throw new Error(error.error.message);
 	}
-	console.log(data);
 
 	return data as STSignInResponse;
 };
