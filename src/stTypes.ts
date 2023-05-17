@@ -29,10 +29,11 @@ export interface Contract {
 
 export interface Faction {
 	symbol: string;
-	name: string;
-	description: string;
-	headquarters: string;
-	traits: {
+	name?: string;
+	reputation?: number;
+	description?: string;
+	headquarters?: string;
+	traits?: {
 		symbol: string; // 'INNOVATIVE', 'BOLD', 'VISIONARY', 'CURIOUS'
 		name: string;
 		description: string;

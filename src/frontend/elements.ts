@@ -25,5 +25,10 @@ export const Elements = {
 		location: document.querySelector('#AgentLocation') as HTMLElement,
 		credits: document.querySelector('#AgentCredits') as HTMLElement,
 		accountId: document.querySelector('#AgentAccountId') as HTMLElement,
+	},
+	FactionPanel: {
+		detailsHider: document.querySelector('#FactionDetailsHider') as HTMLElement,
+		symbol: document.querySelector('#FactionSymbol') as HTMLElement,
+		reputation: document.querySelector('#FactionReputation') as HTMLElement,
 	}
 }
