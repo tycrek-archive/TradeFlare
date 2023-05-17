@@ -17,7 +17,7 @@ TradeFlare is a serverless tool, intended to be used with [Cloudflare Pages](htt
 
 - [x] Basic UI shell
 - [x] Registration
-- [ ] Login
+- [x] Login
 - [ ] Display all details post-login
 - [ ] Ship management
 - [ ] Flight management
