@@ -38,9 +38,9 @@ html.dark.sl-theme-dark(lang='en')
 				//- agent info
 				.info-panel
 					h2.text-2xl.font-bold.mb-2 Agent
-					sl-tooltip(content='Account ID'): h6.w-min.font-space.text-md.text-zinc-500#account-id &nbsp;
-					p.text-lg.mb-2 Welcome, #[strong#agent-name &nbsp;].
-					p.text-lg.mb-2 #[strong Headquarters:] #[span#agent-location &nbsp;]
+					sl-tooltip(content='Account ID'): h6.w-min.font-space.text-md.text-zinc-500#AgentAccountId &nbsp;
+					p.text-lg.mb-2 Welcome, #[strong#AgentName &nbsp;].
+					p.text-lg.mb-2 #[strong Headquarters:] #[span#AgentLocation &nbsp;]
 
 				//- faction info
 				.info-panel
@@ -54,19 +54,19 @@ html.dark.sl-theme-dark(lang='en')
 				.info-panel
 					h2.text-2xl.font-bold.mb-2 Shipyard
 	
-		sl-dialog#new-modal(label='Generate new Agent')
+		sl-dialog#NewUserModal(label='Generate new Agent')
 			p.text-lg.mb-4 Enter a new #[strong call sign], then optionally choose a #[strong faction].
-			sl-input.mb-2#call-sign(type='text' placeholder='Call sign' clearable)
-			sl-input.mb-2#faction(type='text' placeholder='Faction (optional)' clearable)
+			sl-input.mb-2#NewUserCallSign(type='text' placeholder='Call sign' clearable)
+			sl-input.mb-2#NewUserFaction(type='text' placeholder='Faction (optional)' clearable)
 			//- todo: make this a select
 			.w-full.text-center.mt-2
-				sl-button#register(onclick='return;')
+				sl-button#NewUserRegister(onclick='return;')
 					sl-icon(name='fas-user-plus' slot='prefix' library='fa')
 					span.upper.font-bold Register
 
-		sl-dialog#success-dialog(label='Agent created!')
-			p.text-lg.mb-2 Welcome to #[strong SpaceTraders], #[strong#success-name &nbsp;]!
+		sl-dialog#NewUserSuccessDialog(label='Agent created!')
+			p.text-lg.mb-2 Welcome to #[strong SpaceTraders], #[strong#NUSDName &nbsp;]!
 			.flex.justify-center
-				sl-button#CopyNewTokenButton(onclick='return;') Copy token
+				sl-button#NUSDCopyNewTokenButton(onclick='return;') Copy token
 
 		script: include ../dist/ui.js
