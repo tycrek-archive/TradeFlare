@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import SpaceTraders from './st';
 
 /**
  * Bindings introduced for Hono v3.0.0
@@ -27,7 +28,9 @@ app.get(`/api/${API_VERSION}/hello`, (ctx) => ctx.json({ hello: 'world' }));
 app.get(`/api/${API_VERSION}/register/:symbol/:faction`, (ctx) => {
 	const symbol = ctx.req.param('symbol');
 	const faction = ctx.req.param('faction');
-	return ctx.json({ symbol, faction, success: true });
+	return SpaceTraders.register(symbol, faction)
+		.then((data) => ctx.json(data))
+		.catch((err) => ctx.json({ success: false, message: err.message }, 400));
 });
 
 // * Other
