@@ -16,10 +16,10 @@ html.dark.sl-theme-dark(lang='en')
 		+slTheme('dark')
 		//- Shoelace components
 		+slComponents('icon', 'dialog', 'button', 'icon-button', 'tooltip', 'input')
-	body.w-full.h-screen.bg-black
+	body.w-full.h-screen.bg-zinc-950
 		.w-full.h-full.flex.flex-col
 			//- header/token
-			.flex.flex-col.md_flex-row.border-b-2.border-stone-600.p-8.gap-4
+			.flex.flex-col.md_flex-row.border-b-2.border-zinc-800.p-8.gap-4
 				//- header
 				.flex.flex-row.flex-shrink
 					h1.text-4xl.font-bold.self-end.mr-2 #{data.package.name}
@@ -32,13 +32,32 @@ html.dark.sl-theme-dark(lang='en')
 							span.upper.font-bold New
 						sl-input#token(type='password' placeholder='SpaceTrader token' clearable password-toggle)
 							sl-icon(name='fas-lock-keyhole' slot='prefix' library='fa')
+			//- main page
+			.grid.grid-cols-1.md_grid-cols-2.lg_grid-cols-3.gap-4.p-8
+
+				//- agent info
+				.info-panel
+					h2.text-2xl.font-bold.mb-2 Agent
+					sl-tooltip(content='Account ID'): h6.w-min.font-space.text-md.text-zinc-500#account-id &nbsp;
+					p.text-lg.mb-2 Welcome, #[strong#agent-name &nbsp;].
+					p.text-lg.mb-2 #[strong Headquarters:] #[span#agent-location &nbsp;]
+
+				//- faction info
+				.info-panel
+					h2.text-2xl.font-bold.mb-2 Faction
+
+				//- contract details
+				.info-panel
+					h2.text-2xl.font-bold.mb-2 Contract
+
+				//- shipyard
+				.info-panel
+					h2.text-2xl.font-bold.mb-2 Shipyard
 	
 		sl-dialog#new-modal(label='Generate new Agent')
 			p.text-lg.mb-4 Enter a new #[strong call sign], then optionally choose a #[strong faction].
-			h3.text-xl.font-bold.mb-2 Call sign
 			sl-input.mb-2#call-sign(type='text' placeholder='Call sign' clearable)
-			h3.text-xl.font-bold.mb-2 Faction
-			sl-input.mb-2#faction(type='text' placeholder='Faction' clearable)
+			sl-input.mb-2#faction(type='text' placeholder='Faction (optional)' clearable)
 			//- todo: make this a select
 			.w-full.text-center.mt-2
 				sl-button#register(onclick='return;')
@@ -47,6 +66,9 @@ html.dark.sl-theme-dark(lang='en')
 
 		sl-dialog#success-dialog(label='Agent created!')
 			p.text-lg Welcome to #[strong SpaceTraders], #[strong#success-name &nbsp;]!
+			p.text-md.italic Coming soon: a button to copy the token to your clipboard.
+			h3.text-xl.font-bold.font-mono#copyToken &nbsp;
+			//- todo: button to copy token to clipboard
 
 		script.
 			const newDialog = document.querySelector('#new-modal');
@@ -74,6 +96,10 @@ html.dark.sl-theme-dark(lang='en')
 					.then(data => {
 						document.querySelector('#token').value = data.data.token;
 						document.querySelector('#success-name').innerText = data.data.agent.symbol;
+						document.querySelector('#agent-name').innerText = data.data.agent.symbol;
+						document.querySelector('#account-id').innerText = data.data.agent.accountId;
+						document.querySelector('#copyToken').innerText = data.data.token;
+						document.querySelector('#agent-location').innerText = data.data.agent.headquarters;
 						newDialog.hide();
 						successDialog.show();
 					})
