@@ -29,7 +29,7 @@ Elements.NewUser.registerButton.addEventListener('click', (event) => {
 			Elements.NewUser.successName.innerText = data.agent.symbol;
 
 			// Set the agent info in the agent panel
-			updateAgentPanel(data);
+			updateAgentPanel(data.agent);
 
 			(Elements.NewUser.newDialog as any).hide();
 			(Elements.NewUser.successDialog as any).show();
