@@ -37,12 +37,12 @@ Elements.NewUser.registerButton.addEventListener('click', (event) => {
 		.catch((err) => console.error(err));
 });
 
+// Copy the new token to the clipboard
 Elements.NewUser.copyNewTokenButton.addEventListener('click', (event) => {
 	navigator.clipboard.writeText(Elements.Core.userTokenInput.value)
 		.then(() => Elements.NewUser.copyNewTokenButton.innerHTML = 'Copied!')
 		.catch((err) => (console.error(err), alert('An error occurred, see console for details')));
 });
-
 
 // * Sign in flow
 Elements.Core.userTokenInput.addEventListener('sl-input', (event) => {
