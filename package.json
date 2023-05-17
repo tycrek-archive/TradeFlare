@@ -5,7 +5,9 @@
 	"author": "tycrek <t@tycrek.com> (https://tycrek.com)",
 	"repository": "github:tycrek/TradeFlare",
 	"scripts": {
-		"build": "esbuild --bundle src/app.ts --format=esm --outfile=dist/_worker.js",
+		"build": "npm run build:app && npm run build:uijs",
+		"build:app": "esbuild --bundle src/app.ts --format=esm --outfile=dist/_worker.js",
+		"build:uijs": "esbuild --bundle src/frontend/ui.ts --format=esm --outfile=dist/ui.js",
 		"pagery": "node ./node_modules/pagery/dist/pagery.js --data=package.json --output=dist/",
 		"dev": "npm run build && npm run pagery && npx wrangler pages dev dist/",
 		"publish": "npm run build && npm run pagery && npx wrangler pages publish dist/ --project-name=tradeflare"
