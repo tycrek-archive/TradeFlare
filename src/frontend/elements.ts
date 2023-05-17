@@ -15,11 +15,13 @@ export const Elements = {
 		copyNewTokenButton: document.querySelector('#NUSDCopyNewTokenButton') as HTMLElement,
 	},
 	AgentPanel: {
-		name: document.querySelector('#AgentName') as HTMLElement,
-		accountId: document.querySelector('#AgentAccountId') as HTMLElement,
-		location: document.querySelector('#AgentLocation') as HTMLElement,
+		detailsHider: document.querySelector('#AgentDetailsHider') as HTMLElement,
+		avatar: document.querySelector('#AgentAvatar') as HTMLElement,
 
-		nameParent: document.querySelector('#AgentNameParent') as HTMLElement,
-		locationParent: document.querySelector('#AgentLocationParent') as HTMLElement,
+		name: document.querySelector('#AgentName') as HTMLElement,
+		accIdTooltip: document.querySelector('#AgentAccountIdTooltip') as HTMLElement,
+		accIdCopyButton: document.querySelector('#AgentAccountIdCopyButton') as HTMLElement,
+		location: document.querySelector('#AgentLocation') as HTMLElement,
+		accountId: document.querySelector('#AgentAccountId') as HTMLElement,
 	}
 }

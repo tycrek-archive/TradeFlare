@@ -11,18 +11,17 @@ export const updateAgentPanel = (agent: Agent, reset = false) => {
 		Elements.AgentPanel.name.innerText = '&nbsp;';
 		Elements.AgentPanel.accountId.innerText = '&nbsp;';
 		Elements.AgentPanel.location.innerText = '&nbsp;';
+		(Elements.AgentPanel.avatar as any).image = null;
 		// (2/2) Hide elements
-		Elements.AgentPanel.nameParent.classList.add('hidden');
-		Elements.AgentPanel.accountId.classList.add('hidden');
-		Elements.AgentPanel.locationParent.classList.add('hidden');
+		Elements.AgentPanel.detailsHider.classList.add('hidden');
 	} else {
 		// (1/2) Set values
 		Elements.AgentPanel.name.innerText = agent.symbol;
 		Elements.AgentPanel.accountId.innerText = agent.accountId;
+		Elements.AgentPanel.accIdTooltip.setAttribute('content', agent.accountId);
 		Elements.AgentPanel.location.innerText = agent.headquarters;
+		(Elements.AgentPanel.avatar as any).image = `https://robohash.org/${agent.symbol}.png?size=128x128&set=set4&bgset=bg1`;
 		// (2/2) Show elements
-		Elements.AgentPanel.nameParent.classList.remove('hidden');
-		Elements.AgentPanel.accountId.classList.remove('hidden');
-		Elements.AgentPanel.locationParent.classList.remove('hidden');
+		Elements.AgentPanel.detailsHider.classList.remove('hidden');
 	}
 };

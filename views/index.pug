@@ -15,8 +15,8 @@ html.dark.sl-theme-dark(lang='en')
 		include ../node_modules/shoelace-pug-loader/loader.pug
 		+slTheme('dark')
 		//- Shoelace components
-		+slComponents('icon', 'dialog', 'button', 'icon-button', 'tooltip', 'input')
-	body.w-full.h-screen.bg-zinc-950
+		+slComponents('icon', 'dialog', 'button', 'icon-button', 'tooltip', 'input', 'avatar')
+	body.w-full.h-screen.bg-zinc-950.font-space
 		.w-full.h-full.flex.flex-col
 			//- header/token
 			.flex.flex-col.md_flex-row.border-b-2.border-zinc-800.p-8.gap-4
@@ -37,22 +37,37 @@ html.dark.sl-theme-dark(lang='en')
 
 				//- agent info
 				.info-panel
-					h2.info-panel-title Agent
-					sl-tooltip(content='Account ID'): h6.w-min.font-space.text-md.text-zinc-50.hidden#AgentAccountId &nbsp;
-					p.text-lg.mb-2.hidden#AgentNameParent Welcome, #[strong#AgentName &nbsp;].
-					p.text-lg.mb-2.hidden#AgentLocationParent Headquarters: #[strong#AgentLocation &nbsp;]
+					.info-panel-title
+						sl-icon(name='fas-user-astronaut' library='fa')
+						span Agent
+					.p-2.md_p-4
+						.flex.flex-row.gap-4.items-center.hidden#AgentDetailsHider
+							sl-avatar#AgentAvatar(initials='  ')
+							.flex.flex-col.font-bold
+								.flex.items-center.gap-2
+									span.text-2xl#AgentName &nbsp;
+									sl-tooltip#AgentAccountIdTooltip(content='Account ID')
+										sl-icon#AgentAccountIdCopyButton(name='fas-id-card' library='fa')
+								p.text-lg.text-zinc-400 ↪ #[span#AgentLocation &nbsp;]
+								.hidden#AgentAccountId &nbsp;
 
 				//- faction info
 				.info-panel
-					h2.info-panel-title Faction
+					.info-panel-title
+						sl-icon(name='fas-user-group-crown' library='fa')
+						span Faction
 
 				//- contract details
 				.info-panel
-					h2.info-panel-title Contract
+					.info-panel-title
+						sl-icon(name='fas-file' library='fa')
+						span Contract
 
 				//- shipyard
 				.info-panel
-					h2.info-panel-title Shipyard
+					.info-panel-title
+						sl-icon(name='fas-rocket' library='fa')
+						span Shipyard
 	
 		sl-dialog#NewUserModal(label='Generate new Agent')
 			p.text-lg.mb-4 Enter a new #[strong call sign], then optionally choose a #[strong faction].

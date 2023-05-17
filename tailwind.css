@@ -10,8 +10,15 @@
 	}
 
 	.info-panel-title {
-		@apply text-2xl font-bold mb-2 border-b-2 border-zinc-700 pb-2;
+		@apply text-2xl font-bold 
+				pb-4 mb-4 px-2
+				border-b-2 border-zinc-700
+				flex flex-row gap-4 items-center;
 	}
 }
 
 @layer utilities {}
+
+sl-avatar#AgentAvatar {
+	--size: 6rem;
+}
