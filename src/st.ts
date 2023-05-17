@@ -12,7 +12,7 @@ const register = async (symbol: string, faction: string) => {
 	console.log(`[SpaceTraders::Registration] ${res.status} ${res.statusText}`);
 	const data: any = await res.json();
 
-	if (res.status !== 200 || data.error) {
+	if (`${res.status}`[0] != '2' || data.error) {
 		console.error(`[SpaceTraders::Registration] Error: ${data.error.message}`);
 		throw new Error(data.error.message);
 	}
