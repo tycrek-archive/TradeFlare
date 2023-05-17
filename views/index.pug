@@ -27,10 +27,10 @@ html.dark.sl-theme-dark(lang='en')
 				//- token
 				.flex-grow.flex.items-center.justify-center.md_justify-end
 					div.flex.flex-row.gap-4
-						sl-button#new(onclick='return;')
+						sl-button#NewUserButton(onclick='return;')
 							sl-icon(name='fas-user-plus' slot='prefix' library='fa')
 							span.upper.font-bold New
-						sl-input#token(type='password' placeholder='SpaceTrader token' clearable password-toggle)
+						sl-input#UserTokenInput(type='password' placeholder='SpaceTrader token' clearable password-toggle)
 							sl-icon(name='fas-lock-keyhole' slot='prefix' library='fa')
 			//- main page
 			.grid.grid-cols-1.md_grid-cols-2.lg_grid-cols-3.gap-4.p-8
@@ -67,7 +67,6 @@ html.dark.sl-theme-dark(lang='en')
 		sl-dialog#success-dialog(label='Agent created!')
 			p.text-lg.mb-2 Welcome to #[strong SpaceTraders], #[strong#success-name &nbsp;]!
 			.flex.justify-center
-				sl-button#copyNewTokenButton(onclick='return;') Copy token
-				h3.text-xl.font-bold.font-mono.hidden#copyToken &nbsp;
+				sl-button#CopyNewTokenButton(onclick='return;') Copy token
 
 		script: include ../dist/ui.js

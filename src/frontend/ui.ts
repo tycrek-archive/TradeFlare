@@ -1,54 +1,63 @@
-import { newDialog, successDialog, newButton, registerButton, copyNewTokenButton, userTokenInput } from './elements';
+import { Elements } from './elements';
 
-newButton.addEventListener('click', (event) => (newDialog as any).show());
+// * New user flow
+// Open the new user dialog
+Elements.NewUser.newButton.addEventListener('click', (event) => (Elements.NewUser.newDialog as any).show());
 
-registerButton.addEventListener('click', (event) => {
+// Attempts to register the user
+Elements.NewUser.registerButton.addEventListener('click', (event) => {
+
 	// Get the value of the inputs
-	let callSign = (document.querySelector('sl-input#call-sign') as HTMLInputElement).value;
-	let faction = (document.querySelector('sl-input#faction') as HTMLInputElement).value;
+	let callSign = Elements.NewUser.callSignInput.value;
+	let faction = Elements.NewUser.factionInput.value;
 
 	// Fix faction
 	if (faction == null || faction == '')
 		faction = 'COSMIC';
 
-	console.log(`Call sign: ${callSign}`);
-	console.log(`Faction: ${faction}`);
-
+	// Call the API
 	fetch(`/api/v1/register/${callSign}/${faction}`)
 		.then(res => res.json())
 		.then((data: any) => {
-			(document.querySelector('#token') as HTMLInputElement).value = data.data.token;
-			(document.querySelector('#copyToken') as HTMLElement).innerText = data.data.token;
-			(document.querySelector('#success-name') as HTMLElement).innerText = data.data.agent.symbol;
+			// ! This doesn't error handle properly yet
 
-			(document.querySelector('#agent-name') as HTMLElement).innerText = data.data.agent.symbol;
-			(document.querySelector('#account-id') as HTMLElement).innerText = data.data.agent.accountId;
-			(document.querySelector('#agent-location') as HTMLElement).innerText = data.data.agent.headquarters;
+			// Set the primary token input
+			Elements.Core.userTokenInput.value = data.data.token;
 
-			(newDialog as any).hide();
-			(successDialog as any).show();
+			// Set the name in the success dialog
+			Elements.NewUser.successName.innerText = data.data.agent.symbol;
+
+			// Set the agent info in the agent panel
+			Elements.AgentPanel.name.innerText = data.data.agent.symbol;
+			Elements.AgentPanel.accountId.innerText = data.data.agent.accountId;
+			Elements.AgentPanel.location.innerText = data.data.agent.headquarters;
+
+			(Elements.NewUser.newDialog as any).hide();
+			(Elements.NewUser.successDialog as any).show();
 		})
 		.catch(err => console.error(err));
 });
 
-userTokenInput.addEventListener('sl-input', (event) => {
+Elements.NewUser.copyNewTokenButton.addEventListener('click', (event) => {
+	navigator.clipboard.writeText(Elements.Core.userTokenInput.value)
+		.then(() => Elements.NewUser.copyNewTokenButton.innerHTML = 'Copied!')
+		.catch((err) => (console.error(err), alert('An error occurred, see console for details')));
+});
+
+
+// * Sign in flow
+Elements.Core.userTokenInput.addEventListener('sl-input', (event) => {
 	// Get the value of the input
 	console.log(`Token: ${(event.target as HTMLInputElement).value}`);
 
-	fetch(`/api/v1/signin/${userTokenInput.value}`)
+	fetch(`/api/v1/signin/${Elements.Core.userTokenInput.value}`)
 		.then(res => res.json())
 		.then((data: any) => {
 			console.log(data);
-			(document.querySelector('#agent-name') as HTMLElement).innerText = data.data.symbol;
-			(document.querySelector('#account-id') as HTMLElement).innerText = data.data.accountId;
-			(document.querySelector('#agent-location') as HTMLElement).innerText = data.data.headquarters;
+			Elements.AgentPanel.name.innerText = data.data.symbol;
+			Elements.AgentPanel.accountId.innerText = data.data.accountId;
+			Elements.AgentPanel.location.innerText = data.data.headquarters;
 		})
 		.catch(err => console.error(err));
 });
 
-function copyNewToken() {
-	navigator.clipboard.writeText((document.querySelector('#copyToken') as HTMLElement).innerText)
-		.then(() => document.querySelector('#copyNewTokenButton').innerHTML = 'Copied!')
-		.catch((err) => (console.error(err), alert('An error occurred, see console for details')));
-}
-document.querySelector('#copyNewTokenButton').addEventListener('click', copyNewToken);
