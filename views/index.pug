@@ -23,8 +23,8 @@ html.dark.sl-theme-dark(lang='en')
 				//- header
 				.flex.flex-row.flex-shrink
 					sl-avatar.mr-2(image='https://i.tycrek.dev/TradeFlareLogo' shape='rounded')
-					h1.text-4xl.font-bold.self-end.mr-2 #{data.package.name}
-					h2.text-xl.italic.self-end #{data.package.version}
+					h1.text-4xl.font-bold.self-end.mr-2:  a.hover_underline(href='https://github.com/tycrek/TradeFlare#readme' target='_blank')= data.package.name
+					h2.text-xl.italic.self-end.text-zinc-400 #{data.package.version}
 				//- token
 				.flex-grow.flex.items-center.justify-center.md_justify-end
 					div.flex.flex-row.gap-4
