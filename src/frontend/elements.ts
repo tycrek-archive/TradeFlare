@@ -1,6 +1,7 @@
 export const Elements = {
 	Core: {
-		userTokenInput: document.querySelector('#UserTokenInput') as HTMLInputElement
+		userTokenInput: document.querySelector('#UserTokenInput') as HTMLInputElement,
+		copySuccessDialog: document.querySelector('#CopySuccessDialog') as HTMLElement,
 	},
 	NewUser: {
 		newButton: document.querySelector('#NewUserButton') as HTMLElement,

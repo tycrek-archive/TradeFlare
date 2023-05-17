@@ -51,7 +51,7 @@ html.dark.sl-theme-dark(lang='en')
 								.flex.items-center.gap-2
 									span.text-2xl#AgentName &nbsp;
 									sl-tooltip#AgentAccountIdTooltip(content='Account ID')
-										sl-icon.text-zinc-400#AgentAccountIdCopyButton(name='fas-id-card' library='fa')
+										sl-icon.hover_cursor-pointer.text-zinc-400#AgentAccountIdCopyButton(name='fas-id-card' library='fa')
 								p.text-lg.text-zinc-400 ↪ #[span#AgentLocation &nbsp;]
 								p.text-lg.text-zinc-400 ↪ $#[span#AgentCredits &nbsp;]
 								.hidden#AgentAccountId &nbsp;
@@ -73,6 +73,8 @@ html.dark.sl-theme-dark(lang='en')
 					.info-panel-title
 						sl-icon.text-zinc-400(name='fas-rocket' library='fa')
 						span Shipyard
+		
+		sl-dialog#CopySuccessDialog(label='Copied to clipboard!')
 	
 		sl-dialog#NewUserModal(label='Generate new Agent')
 			p.text-lg.mb-4 Enter a new #[strong call sign], then optionally choose a #[strong faction].

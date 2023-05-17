@@ -65,3 +65,11 @@ Elements.Core.userTokenInput.addEventListener('sl-input', (event) => {
 
 		.catch((err) => (console.error(err), updateAgentPanel(null, true)));
 });
+
+// * Agent panel
+// Copy account ID to clipboard
+Elements.AgentPanel.accIdCopyButton.addEventListener('click', (event) => {
+	navigator.clipboard.writeText(Elements.AgentPanel.accountId.innerText)
+		.then(() => (Elements.Core.copySuccessDialog as any).show())
+		.catch((err) => (console.error(err), alert('An error occurred, see console for details')));
+});
